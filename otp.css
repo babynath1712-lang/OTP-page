@@ -1,0 +1,648 @@
+/* ============================================
+   NEXORA OTP VERIFICATION — STYLES
+   ============================================ */
+
+/* ─── Design Tokens ─────────────────────────── */
+:root {
+  --bg-primary:      #0a0a0f;
+  --bg-secondary:    #111118;
+  --text-primary:    #f0f0f5;
+  --text-secondary:  #8b8b9e;
+  --text-tertiary:   #5a5a72;
+
+  --accent-purple:   #818cf8;
+  --accent-violet:   #a78bfa;
+  --accent-indigo:   #6366f1;
+  --accent-cyan:     #06b6d4;
+  --accent-green:    #34d399;
+  --accent-amber:    #f59e0b;
+  --accent-red:      #ef4444;
+
+  --gradient-cta:    linear-gradient(135deg, #6366f1, #818cf8);
+  --gradient-text:   linear-gradient(135deg, #f0f0f5, #c4b5fd);
+
+  --border-subtle:   rgba(255, 255, 255, 0.06);
+  --border-light:    rgba(255, 255, 255, 0.10);
+
+  --shadow-lg:       0 16px 64px rgba(0, 0, 0, 0.4);
+  --shadow-glow:     0 0 60px rgba(99, 102, 241, 0.15);
+  --shadow-glow-str: 0 0 80px rgba(99, 102, 241, 0.25);
+
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --tr-fast:     0.18s var(--ease-out);
+  --tr-normal:   0.35s var(--ease-out);
+  --tr-slow:     0.6s  var(--ease-out);
+}
+
+/* ─── Reset ─────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+
+/* ─── Animated Orb Background ───────────────── */
+.otp-bg {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none; overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.38;
+}
+.orb-1 {
+  width: 580px; height: 580px;
+  background: radial-gradient(circle, rgba(99,102,241,0.32), transparent 70%);
+  top: -170px; left: -90px;
+  animation: orbA 20s ease-in-out infinite;
+}
+.orb-2 {
+  width: 460px; height: 460px;
+  background: radial-gradient(circle, rgba(167,139,250,0.28), transparent 70%);
+  bottom: -100px; right: -70px;
+  animation: orbB 26s ease-in-out infinite;
+}
+.orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(6,182,212,0.18), transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation: orbC 22s ease-in-out infinite;
+}
+@keyframes orbA {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(90px,70px) scale(1.1); }
+  66%      { transform: translate(-40px,110px) scale(0.9); }
+}
+@keyframes orbB {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(-70px,-55px) scale(1.12); }
+  66%      { transform: translate(50px,35px) scale(0.88); }
+}
+@keyframes orbC {
+  0%,100% { transform: translate(-50%,-50%) scale(1); }
+  33%      { transform: translate(-42%,-62%) scale(1.08); }
+  66%      { transform: translate(-58%,-40%) scale(0.94); }
+}
+
+/* ─── Particles ──────────────────────────────── */
+.otp-particles {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none; overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: rgba(129,140,248,0.3);
+  border-radius: 50%;
+  animation: ptFloat linear infinite;
+}
+.particle:nth-child(1) { left:8%;  top:22%; animation-duration:15s; animation-delay:0s;   }
+.particle:nth-child(2) { left:28%; top:62%; animation-duration:21s; animation-delay:2s;   }
+.particle:nth-child(3) { left:52%; top:18%; animation-duration:17s; animation-delay:4s;   }
+.particle:nth-child(4) { left:72%; top:74%; animation-duration:23s; animation-delay:1s;   }
+.particle:nth-child(5) { left:86%; top:30%; animation-duration:18s; animation-delay:3s;   }
+.particle:nth-child(6) { left:40%; top:86%; animation-duration:20s; animation-delay:5s;   }
+.particle:nth-child(7) { left:92%; top:50%; animation-duration:16s; animation-delay:2.5s; }
+.particle:nth-child(8) { left:5%;  top:48%; animation-duration:19s; animation-delay:1.5s; }
+
+@keyframes ptFloat {
+  0%   { transform: translateY(0)    translateX(0)   scale(1);   opacity:0;   }
+  10%  {                                                          opacity:0.5; }
+  50%  { transform: translateY(-95px) translateX(28px) scale(1.5); opacity:0.25;}
+  90%  {                                                          opacity:0.4; }
+  100% { transform: translateY(-190px) translateX(-18px) scale(0.7); opacity:0; }
+}
+
+/* ─── Page Layout ────────────────────────────── */
+.otp-page {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh;
+  padding: 40px 24px;
+}
+
+/* ─── Back Link ──────────────────────────────── */
+.otp-back {
+  position: fixed; top: 28px; left: 28px; z-index: 10;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.88rem; font-weight: 500;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+  transition: all var(--tr-fast);
+}
+.otp-back:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.06);
+  border-color: var(--border-light);
+  transform: translateX(-3px);
+}
+.otp-back svg { transition: transform var(--tr-fast); }
+.otp-back:hover svg { transform: translateX(-2px); }
+
+/* ─── Card ───────────────────────────────────── */
+.otp-card {
+  display: none;
+  width: 100%; max-width: 460px;
+  background: rgba(17,17,24,0.78);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 48px 40px;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  position: relative; overflow: hidden;
+}
+.otp-card.active {
+  display: block;
+  animation: cardIn 0.65s var(--ease-out) forwards;
+  opacity: 0;
+  transform: translateY(22px) scale(0.98);
+}
+/* top shimmer line */
+.otp-card::before {
+  content: '';
+  position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 300px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(129,140,248,0.55), transparent);
+}
+/* ambient glow behind logo */
+.otp-card::after {
+  content: '';
+  position: absolute; top: -70px; left: 50%;
+  transform: translateX(-50%);
+  width: 240px; height: 150px;
+  background: radial-gradient(ellipse, rgba(99,102,241,0.09), transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes cardIn {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── Header ─────────────────────────────────── */
+.otp-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.otp-icon-wrap {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+/* Animated signal rings around shield icon */
+.otp-signal-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(129,140,248,0.25);
+  animation: ringPulse 2.4s ease-out infinite;
+}
+.ring-1 { width: 76px;  height: 76px;  animation-delay: 0s;    }
+.ring-2 { width: 96px;  height: 96px;  animation-delay: 0.6s;  }
+.ring-3 { width: 116px; height: 116px; animation-delay: 1.2s;  }
+
+@keyframes ringPulse {
+  0%   { opacity: 0.8; transform: scale(0.92); }
+  70%  { opacity: 0;   transform: scale(1.1);  }
+  100% { opacity: 0;   transform: scale(1.1);  }
+}
+
+.otp-icon {
+  width: 64px; height: 64px;
+  border-radius: var(--radius-lg);
+  background: rgba(129,140,248,0.10);
+  border: 1px solid rgba(129,140,248,0.22);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-purple);
+  position: relative; z-index: 1;
+  transition: all var(--tr-normal);
+}
+
+.otp-icon-success {
+  background: rgba(52,211,153,0.10);
+  border-color: rgba(52,211,153,0.22);
+  color: var(--accent-green);
+}
+.otp-icon-warning {
+  background: rgba(245,158,11,0.10);
+  border-color: rgba(245,158,11,0.22);
+  color: var(--accent-amber);
+}
+
+.otp-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.75rem; font-weight: 800;
+  letter-spacing: -0.02em; margin-bottom: 8px;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.otp-header p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+.otp-target {
+  color: var(--accent-purple);
+  font-weight: 600;
+}
+
+/* ─── OTP Input Boxes ────────────────────────── */
+.otp-inputs-wrap {
+  margin-bottom: 6px;
+}
+
+.otp-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.otp-separator {
+  color: var(--text-tertiary);
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: -2px;
+  margin: 0 2px;
+  user-select: none;
+}
+
+.otp-digit {
+  width: 54px;
+  height: 60px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  caret-color: var(--accent-purple);
+  outline: none;
+  transition: all var(--tr-normal);
+  /* subtle inner shadow for depth */
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.otp-digit::selection {
+  background: rgba(99,102,241,0.25);
+}
+
+.otp-digit:focus {
+  border-color: rgba(129,140,248,0.55);
+  background: rgba(255,255,255,0.07);
+  box-shadow:
+    inset 0 1px 4px rgba(0,0,0,0.2),
+    0 0 0 3px rgba(99,102,241,0.12),
+    0 0 18px rgba(99,102,241,0.08);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.otp-digit.filled {
+  border-color: rgba(129,140,248,0.4);
+  background: rgba(99,102,241,0.08);
+  color: var(--accent-violet);
+}
+
+.otp-digit.error {
+  border-color: rgba(239,68,68,0.55);
+  background: rgba(239,68,68,0.06);
+  box-shadow:
+    inset 0 1px 4px rgba(0,0,0,0.2),
+    0 0 0 3px rgba(239,68,68,0.1);
+  animation: digitShake 0.4s var(--ease-out);
+}
+
+.otp-digit.success {
+  border-color: rgba(52,211,153,0.45);
+  background: rgba(52,211,153,0.08);
+  color: var(--accent-green);
+}
+
+@keyframes digitShake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  50%      { transform: translateX(4px); }
+  75%      { transform: translateX(-2px); }
+}
+
+/* Inline error text */
+.otp-inline-error {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #fca5a5;
+  min-height: 18px;
+  transition: opacity var(--tr-fast);
+  opacity: 0;
+}
+.otp-inline-error.visible { opacity: 1; }
+
+/* ─── Progress Bar ───────────────────────────── */
+.otp-progress-wrap {
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.otp-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--gradient-cta);
+  border-radius: 2px;
+  transition: width 0.25s var(--ease-out);
+  box-shadow: 0 0 8px rgba(99,102,241,0.4);
+}
+
+/* ─── Countdown Timer ────────────────────────── */
+.otp-timer-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  margin-bottom: 22px;
+}
+.otp-timer-wrap strong {
+  color: var(--accent-purple);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  transition: color var(--tr-fast);
+}
+.otp-timer-wrap.expiring-soon strong {
+  color: var(--accent-amber);
+  animation: timerPulse 1s ease-in-out infinite;
+}
+.otp-timer-wrap.expired strong {
+  color: var(--accent-red);
+}
+@keyframes timerPulse {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.5; }
+}
+
+/* ─── Submit Button ──────────────────────────── */
+.otp-submit {
+  display: flex;
+  align-items: center; justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 24px;
+  background: var(--gradient-cta);
+  color: #fff;
+  font-size: 0.92rem; font-weight: 600;
+  border: none; border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--tr-normal);
+  box-shadow: 0 4px 20px rgba(99,102,241,0.28);
+  position: relative; overflow: hidden;
+  margin-bottom: 20px;
+}
+.otp-submit::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+  opacity: 0; transition: opacity var(--tr-normal);
+}
+.otp-submit:hover:not(:disabled) {
+  box-shadow: 0 6px 28px rgba(99,102,241,0.48);
+  transform: translateY(-2px);
+}
+.otp-submit:hover:not(:disabled)::before { opacity: 1; }
+.otp-submit:active:not(:disabled)        { transform: translateY(0); }
+.otp-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.otp-btn-loader {
+  display: flex; align-items: center;
+}
+.otp-btn-loader svg {
+  animation: spinBtn 0.8s linear infinite;
+}
+@keyframes spinBtn {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Resend ─────────────────────────────────── */
+.otp-resend-wrap {
+  display: flex;
+  align-items: center; justify-content: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+.otp-resend-btn {
+  background: none; border: none;
+  color: var(--accent-purple);
+  font-size: 0.84rem; font-weight: 600;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 4px;
+  transition: color var(--tr-fast);
+  padding: 0;
+}
+.otp-resend-btn:hover:not(:disabled) { color: var(--accent-violet); }
+.otp-resend-btn:disabled {
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+}
+.otp-resend-cooldown {
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+/* ─── Method Switch Tabs ─────────────────────── */
+.otp-method-switch {
+  display: flex;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 4px;
+}
+.otp-method-btn {
+  flex: 1;
+  display: flex;
+  align-items: center; justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius-md) - 4px);
+  color: var(--text-tertiary);
+  font-size: 0.82rem; font-weight: 500;
+  cursor: pointer;
+  transition: all var(--tr-normal);
+}
+.otp-method-btn:hover:not(.active) {
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.03);
+}
+.otp-method-btn.active {
+  background: rgba(129,140,248,0.12);
+  border: 1px solid rgba(129,140,248,0.2);
+  color: var(--accent-purple);
+  box-shadow: 0 2px 8px rgba(99,102,241,0.1);
+}
+
+/* ─── Success Visual ─────────────────────────── */
+.otp-confetti {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.otp-success-visual {
+  display: flex;
+  align-items: center; justify-content: center;
+  position: relative;
+  height: 110px;
+  margin-bottom: 24px;
+}
+
+.success-pulse-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(52,211,153,0.2);
+}
+.ring-a {
+  width: 90px; height: 90px;
+  animation: successRing 2s var(--ease-out) infinite;
+}
+.ring-b {
+  width: 70px; height: 70px;
+  animation: successRing 2s var(--ease-out) 0.5s infinite;
+}
+@keyframes successRing {
+  0%   { transform: scale(0.85); opacity: 0.7; }
+  100% { transform: scale(1.5);  opacity: 0;   }
+}
+
+.success-check-circle {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: rgba(52,211,153,0.10);
+  border: 2px solid rgba(52,211,153,0.30);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-green);
+  position: relative; z-index: 1;
+  animation: checkPop 0.55s var(--ease-spring) 0.2s both;
+}
+.success-check-circle::after {
+  content: '';
+  position: absolute;
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(52,211,153,0.10), transparent 70%);
+  filter: blur(10px); z-index: -1;
+}
+@keyframes checkPop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.otp-success-info {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.otp-success-badge {
+  display: inline-flex;
+  align-items: center; gap: 6px;
+  padding: 5px 14px;
+  background: rgba(52,211,153,0.08);
+  border: 1px solid rgba(52,211,153,0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem; font-weight: 600;
+  color: var(--accent-green);
+  letter-spacing: 0.03em;
+  animation: badgeSlide 0.5s var(--ease-spring) 0.5s both;
+}
+@keyframes badgeSlide {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+/* ─── Switch Link ────────────────────────────── */
+.otp-switch {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.otp-switch a {
+  color: var(--accent-purple);
+  font-weight: 600;
+  transition: color var(--tr-fast);
+}
+.otp-switch a:hover { color: var(--accent-violet); }
+
+/* ─── Footer ─────────────────────────────────── */
+.otp-footer {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  white-space: nowrap; z-index: 5;
+}
+.otp-footer a {
+  color: var(--text-secondary);
+  transition: color var(--tr-fast);
+}
+.otp-footer a:hover { color: var(--accent-purple); }
+
+/* ─── Responsive ─────────────────────────────── */
+@media (max-width: 520px) {
+  .otp-card { padding: 36px 24px; border-radius: var(--radius-lg); }
+  .otp-header h1 { font-size: 1.5rem; }
+  .otp-back { top: 16px; left: 16px; font-size: 0.82rem; padding: 6px 12px; }
+  .otp-footer { font-size: 0.7rem; }
+  .otp-page { padding: 80px 16px 60px; }
+  .otp-digit { width: 46px; height: 54px; font-size: 1.4rem; }
+  .otp-inputs { gap: 7px; }
+  .ring-1 { width: 68px; height: 68px; }
+  .ring-2 { width: 86px; height: 86px; }
+  .ring-3 { width: 104px; height: 104px; }
+}
+
+@media (max-width: 380px) {
+  .otp-digit { width: 40px; height: 50px; font-size: 1.25rem; border-radius: var(--radius-sm); }
+  .otp-inputs { gap: 5px; }
+  .otp-separator { margin: 0; }
+  .otp-card { padding: 28px 16px; }
+}
